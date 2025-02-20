@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from colorama import Fore
 import warnings
+import os
 
 
 warnings.filterwarnings("ignore")
@@ -10,18 +11,18 @@ warnings.filterwarnings("ignore")
 load_dotenv()
 
 # Load the model
-client = OpenAI()
+stringValue=os.getenv("DEEPSEEK_R1_API_KEY")
+client = OpenAI(base_url="https://openrouter.ai/api/v1",api_key=stringValue)
 
-# Define a request
-print(Fore.GREEN+"I have made it again working, Hurrahh...")
-
-
+print(Fore.BLUE+"Now AI is bringing the response please be patient"+Fore.RESET)
 completion = client.chat.completions.create(
-  model="gpt-4o-mini",
-  messages=[
-    {"role": "programmer", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "can you tell me why we use RAG in AI?"}
-  ]
-)
+     model="deepseek/deepseek-r1:free",
+     messages=[
+       {
+         "role": "user",
+         "content": "2 sentence answer Is RAG based apps are AI apps?"  
+       }
+     ]
+   )
 
-print(completion.choices[0].message.content)
+print(Fore.Green+completion.choices[0].message.content+Fore.RESET)
