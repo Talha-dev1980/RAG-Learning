@@ -25,4 +25,4 @@ completion = client.chat.completions.create(
      ]
    )
 
-print(Fore.Green+completion.choices[0].message.content+Fore.RESET)
+print(Fore.GREEN+completion.choices[0].message.content+Fore.RESET)
